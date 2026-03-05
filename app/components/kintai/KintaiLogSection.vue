@@ -18,19 +18,13 @@ defineProps<{
       </div>
     </div>
 
-    <UButton
+    <BaseButton
       type="submit"
       block
-      size="xl"
-      color="primary"
-      variant="solid"
       :loading="isLoading"
-      class="font-bold tracking-wide shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 active:translate-y-0"
+      icon="i-heroicons-paper-airplane"
     >
-      <template #leading>
-        <UIcon name="i-heroicons-paper-airplane" class="w-5 h-5" />
-      </template>
       Submit to Portal
-    </UButton>
+    </BaseButton>
   </KintaiCard>
 </template>
