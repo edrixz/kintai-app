@@ -11,11 +11,13 @@ defineProps<{
 </script>
 
 <template>
-  <UCard :ui="{ body: 'p-4 sm:p-6', header: 'p-4' }" class="mb-4">
+  <UCard :ui="{ body: 'p-5 sm:p-8', header: 'p-5 border-b border-gray-100 dark:border-gray-800 bg-white/50 dark:bg-gray-900/50 rounded-t-xl backdrop-blur' }" class="mb-6 rounded-xl transition-shadow hover:shadow-2xl">
     <template #header>
-      <div class="flex items-center gap-2">
-        <UIcon v-if="icon" :name="icon" class="w-5 h-5 text-primary" />
-        <h3 class="font-bold text-gray-900 dark:text-white">{{ title }}</h3>
+      <div class="flex items-center gap-3">
+        <div v-if="icon" class="flex items-center justify-center w-10 h-10 rounded-full bg-primary-50 dark:bg-primary-900/40 text-primary-600 dark:text-primary-400">
+          <UIcon :name="icon" class="w-6 h-6" />
+        </div>
+        <h3 class="font-black text-lg text-gray-900 dark:text-gray-100 tracking-tight">{{ title }}</h3>
       </div>
     </template>
 

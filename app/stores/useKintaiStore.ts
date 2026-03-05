@@ -9,7 +9,7 @@ import type { KintaiPreset } from "~/types/kintai";
  */
 export const useKintaiStore = defineStore("kintai", () => {
   const defaultPreset: KintaiPreset = {
-    loginId: "",
+    loginId: "E0001261",
     year: new Date().getFullYear().toString(),
     month: String(new Date().getMonth() + 1).padStart(2, "0"),
     day: "",

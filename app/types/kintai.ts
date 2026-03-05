@@ -1,5 +1,5 @@
 // types/kintai.ts
-import type { WorkTypeCode } from "~/consts/kintai";
+import type { WorkTypeCode } from "~/constants/kintai";
 
 /**
  * Represents the user's customized preset for Kintai submission.
