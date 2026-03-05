@@ -25,12 +25,10 @@ export const WORK_TYPES = {
  */
 export type WorkTypeCode = keyof typeof WORK_TYPES;
 
-import type { SelectItem } from "@nuxt/ui";
-
 /**
  * Array format for Nuxt UI Select component options.
  */
-export const WORK_TYPE_OPTIONS: SelectItem[] = Object.entries(WORK_TYPES).map(
+export const WORK_TYPE_OPTIONS: { value: string; label: string }[] = Object.entries(WORK_TYPES).map(
   ([value, label]) => ({
     value,
     label,

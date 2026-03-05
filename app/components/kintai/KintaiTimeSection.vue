@@ -7,83 +7,82 @@ const store = useKintaiStore();
 <template>
   <KintaiCard title="Time & Work Type" icon="i-heroicons-clock" class="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border border-white/20 shadow-xl ring-1 ring-gray-200 dark:ring-gray-800">
     <div class="grid grid-cols-3 gap-6 mb-6">
-      <UFormField label="Year" class="w-full">
-        <UInput v-model="store.preset.year" size="lg" class="w-full" />
-      </UFormField>
-      <UFormField label="Month" class="w-full">
-        <UInput v-model="store.preset.month" size="lg" class="w-full" />
-      </UFormField>
-      <UFormField label="Day" class="w-full">
-        <UInput v-model="store.preset.day" placeholder="Today" size="lg" class="w-full" />
-      </UFormField>
+      <BaseInput
+        v-model="store.preset.year"
+        label="Year"
+      />
+      <BaseInput
+        v-model="store.preset.month"
+        label="Month"
+      />
+      <BaseInput
+        v-model="store.preset.day"
+        label="Day"
+        placeholder="Today"
+      />
     </div>
 
     <div class="grid grid-cols-2 gap-6 mb-6">
-      <UFormField label="Work Type" class="w-full">
-        <USelectMenu
-          v-model="store.preset.workTypeCode"
-          :items="WORK_TYPE_OPTIONS"
-          option-attribute="label"
-          value-attribute="value"
-          size="lg"
-          class="w-full"
-        />
-      </UFormField>
+      <BaseSelect
+        v-model="store.preset.workTypeCode"
+        :options="WORK_TYPE_OPTIONS"
+        label="Work Type"
+      />
       <div class="flex items-center pt-6"> <!-- Aligns with the input visually -->
-        <UCheckbox
+        <BaseCheckbox
           v-model="store.preset.isTelework"
           label="Telework (在宅)"
-          color="primary"
-          class="font-medium"
         />
       </div>
     </div>
 
     <div class="grid grid-cols-2 gap-6 mb-6">
-      <UFormField label="Start Time" class="w-full">
+      <div class="flex flex-col gap-1.5 w-full">
+        <label class="text-sm font-semibold text-gray-700 dark:text-gray-300 flex items-center justify-between">
+          <span>Start Time</span>
+        </label>
         <div class="flex items-center gap-3">
-          <UInput
+          <BaseInput
             v-model="store.preset.startHour"
-            class="w-full text-center"
-            size="lg"
             placeholder="09"
           />
           <span class="text-gray-500 font-bold">:</span>
-          <UInput
+          <BaseInput
             v-model="store.preset.startMinute"
-            class="w-full text-center"
-            size="lg"
             placeholder="45"
           />
         </div>
-      </UFormField>
-      <UFormField label="End Time" class="w-full">
+      </div>
+      
+      <div class="flex flex-col gap-1.5 w-full">
+        <label class="text-sm font-semibold text-gray-700 dark:text-gray-300 flex items-center justify-between">
+          <span>End Time</span>
+        </label>
         <div class="flex items-center gap-3">
-          <UInput 
+          <BaseInput 
             v-model="store.preset.endHour" 
-            class="w-full text-center" 
-            size="lg" 
             placeholder="18"
           />
           <span class="text-gray-500 font-bold">:</span>
-          <UInput
+          <BaseInput
             v-model="store.preset.endMinute"
-            class="w-full text-center"
-            size="lg"
             placeholder="45"
           />
         </div>
-      </UFormField>
+      </div>
     </div>
 
-    <UFormField label="Comment">
-      <UTextarea
-        v-model="store.preset.comment"
-        autoresize
-        placeholder="Optional notes for today..."
-        size="lg"
-        class="transition-all duration-300 hover:ring-primary-500/50 focus:ring-primary-500"
-      />
-    </UFormField>
+    <div class="flex flex-col gap-1.5 w-full">
+      <label class="text-sm font-semibold text-gray-700 dark:text-gray-300 flex items-center justify-between">
+        <span>Comment</span>
+      </label>
+      <div class="relative flex items-center w-full transition-all duration-300 bg-white/50 dark:bg-gray-900/50 backdrop-blur-md border rounded-xl overflow-hidden border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 focus-within:border-primary-500 focus-within:ring-4 focus-within:ring-primary-500/20">
+        <textarea
+          v-model="store.preset.comment"
+          class="w-full min-h-[100px] py-2.5 px-3.5 bg-transparent border-none outline-none text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 text-base resize-y"
+          placeholder="Optional notes for today..."
+        ></textarea>
+      </div>
+    </div>
   </KintaiCard>
 </template>
