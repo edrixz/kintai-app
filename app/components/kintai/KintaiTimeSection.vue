@@ -1,12 +1,41 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
-import { WORK_TYPE_OPTIONS, QUICK_FILL_PRESETS } from "~/constants/kintai";
+import { ref, watch, onMounted, onUnmounted } from 'vue';
+import { WORK_TYPE_OPTIONS } from "~/constants/kintai";
+import { getDb, type KintaiPresetDocType } from "~/utils/db.client";
 
 const store = useKintaiStore();
 const selectedQuickFill = ref('custom');
 
+const quickFillOptions = ref<{ label: string; value: string; preset: KintaiPresetDocType | null }[]>([
+  { label: 'Custom (Tùy chỉnh)', value: 'custom', preset: null }
+]);
+
+let subscription: any;
+
+onMounted(async () => {
+  if (import.meta.client) {
+    const db = await getDb();
+    subscription = db.presets.find().$.subscribe((presets) => {
+      quickFillOptions.value = [
+        { label: 'Custom (Tùy chỉnh)', value: 'custom', preset: null },
+        ...presets.map(p => ({
+          label: p.name,
+          value: p.id,
+          preset: p
+        }))
+      ];
+    });
+  }
+});
+
+onUnmounted(() => {
+  if (subscription) {
+    subscription.unsubscribe();
+  }
+});
+
 watch(selectedQuickFill, (newVal) => {
-  const presetEntry = QUICK_FILL_PRESETS.find(p => p.value === newVal);
+  const presetEntry = quickFillOptions.value.find(p => p.value === newVal);
   if (presetEntry && presetEntry.preset) {
     const p = presetEntry.preset;
     store.preset.workTypeCode = p.workTypeCode as any;
@@ -24,7 +53,7 @@ watch(selectedQuickFill, (newVal) => {
     <div class="mb-6">
       <BaseSelect
         v-model="selectedQuickFill"
-        :options="QUICK_FILL_PRESETS"
+        :options="quickFillOptions"
         label="Quick Fill Preset"
       />
     </div>

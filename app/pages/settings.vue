@@ -24,6 +24,9 @@ const saveSettings = () => {
     <!-- The Auth section binds directly to the persistent store now -->
     <KintaiAuthSection />
 
+    <!-- The Preset Management section binds directly to RxDB -->
+    <KintaiPresetManagementSection />
+
     <div class="flex justify-end pt-4">
       <BaseButton
         type="button"
