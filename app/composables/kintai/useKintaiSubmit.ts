@@ -14,9 +14,10 @@ export const useKintaiSubmit = () => {
     logs.value.push(`[${time}] ${message}`);
   };
 
-  const submitKintai = async (password: string) => {
+  const submitKintai = async () => {
+    const password = store.preset.password;
     if (!password) {
-      addLog("Error: Password is required.");
+      addLog("Error: Password is required. Please set it in Settings.");
       return;
     }
 

@@ -22,6 +22,7 @@ export const useKintaiStore = defineStore("kintai", () => {
     workTypeCode: "10",
     comment: "",
     isTelework: false,
+    password: "",
   };
 
   // Persist state to localStorage under the key 'edrixx-kintai-preset'

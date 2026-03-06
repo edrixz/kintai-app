@@ -34,3 +34,74 @@ export const WORK_TYPE_OPTIONS: { value: string; label: string }[] = Object.entr
     label,
   }),
 );
+
+/**
+ * Pre-defined configurations for quick filling Kintai forms.
+ */
+export const QUICK_FILL_PRESETS = [
+  {
+    label: "Custom (Tùy chỉnh)",
+    value: "custom",
+    preset: null
+  },
+  {
+    label: "通常勤務 (Normal Work)",
+    value: "normal",
+    preset: {
+      workTypeCode: "10",
+      startHour: "09",
+      startMinute: "45",
+      endHour: "18",
+      endMinute: "45",
+      isTelework: false,
+    }
+  },
+  {
+    label: "在宅勤務 (Telework)",
+    value: "telework",
+    preset: {
+      workTypeCode: "10",
+      startHour: "09",
+      startMinute: "45",
+      endHour: "18",
+      endMinute: "45",
+      isTelework: true,
+    }
+  },
+  {
+    label: "一日有給休暇 (Full Paid Leave)",
+    value: "paid_leave",
+    preset: {
+      workTypeCode: "20",
+      startHour: "",
+      startMinute: "",
+      endHour: "",
+      endMinute: "",
+      isTelework: false,
+    }
+  },
+  {
+    label: "午前半休 (Morning Leave)",
+    value: "morning_leave",
+    preset: {
+      workTypeCode: "21",
+      startHour: "14",
+      startMinute: "00",
+      endHour: "18",
+      endMinute: "45",
+      isTelework: false,
+    }
+  },
+  {
+    label: "午後半休 (Afternoon Leave)",
+    value: "afternoon_leave",
+    preset: {
+      workTypeCode: "21",
+      startHour: "09",
+      startMinute: "45",
+      endHour: "14",
+      endMinute: "00",
+      isTelework: false,
+    }
+  }
+];

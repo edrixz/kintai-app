@@ -1,11 +1,34 @@
 <script setup lang="ts">
-import { WORK_TYPE_OPTIONS } from "~/constants/kintai";
+import { ref, watch } from 'vue';
+import { WORK_TYPE_OPTIONS, QUICK_FILL_PRESETS } from "~/constants/kintai";
 
 const store = useKintaiStore();
+const selectedQuickFill = ref('custom');
+
+watch(selectedQuickFill, (newVal) => {
+  const presetEntry = QUICK_FILL_PRESETS.find(p => p.value === newVal);
+  if (presetEntry && presetEntry.preset) {
+    const p = presetEntry.preset;
+    store.preset.workTypeCode = p.workTypeCode as any;
+    store.preset.startHour = p.startHour;
+    store.preset.startMinute = p.startMinute;
+    store.preset.endHour = p.endHour;
+    store.preset.endMinute = p.endMinute;
+    store.preset.isTelework = p.isTelework;
+  }
+});
 </script>
 
 <template>
   <KintaiCard title="Time & Work Type" icon="i-heroicons-clock" class="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border border-white/20 shadow-xl ring-1 ring-gray-200 dark:ring-gray-800">
+    <div class="mb-6">
+      <BaseSelect
+        v-model="selectedQuickFill"
+        :options="QUICK_FILL_PRESETS"
+        label="Quick Fill Preset"
+      />
+    </div>
+    
     <div class="grid grid-cols-3 gap-6 mb-6">
       <BaseInput
         v-model="store.preset.year"

@@ -14,6 +14,10 @@ export default defineNuxtConfig({
     strict: true,
     typeCheck: false,
   },
+  app: {
+    pageTransition: { name: 'page', mode: 'out-in' },
+    layoutTransition: { name: 'layout', mode: 'out-in' }
+  },
   css: ["./app/assets/css/main.css"],
   // Auto-import Pinia stores
   imports: {

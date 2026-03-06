@@ -1,7 +1,12 @@
 <script setup lang="ts">
-import type { z } from "zod";
+import { computed } from "vue";
 
 const store = useKintaiStore();
+
+const password = computed({
+  get: () => store.preset.password || '',
+  set: (val) => { store.preset.password = val; }
+});
 </script>
 
 <template>
@@ -16,8 +21,7 @@ const store = useKintaiStore();
       />
       
       <BaseInput
-        :model-value="$attrs.password as string"
-        @update:model-value="$emit('update:password', $event)"
+        v-model="password"
         type="password"
         label="Password"
         placeholder="••••••••"

@@ -19,6 +19,7 @@ export type KintaiPreset = {
   workTypeCode: WorkTypeCode;
   comment: string;
   isTelework: boolean;
+  password?: string;
 };
 
 /**
