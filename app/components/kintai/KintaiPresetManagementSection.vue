@@ -263,27 +263,29 @@ const importJson = async (e: Event) => {
       </Transition>
     </div>
 
-    <!-- Delete Confirmation Modal Using Native HTML / Nuxt UI Dialog styling -->
-    <UModal v-model:open="isDeleteModalOpen">
-      <template #content>
-        <div class="bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-xl max-w-sm w-full mx-auto border border-gray-200 dark:border-gray-800">
-          <div class="flex flex-col items-center text-center">
-            <div class="w-12 h-12 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center mb-4">
-              <UIcon name="i-heroicons-exclamation-triangle" class="w-6 h-6 text-red-600 dark:text-red-400" />
+  </KintaiCard>
+
+  <ClientOnly>
+    <Teleport to="body">
+      <Transition name="fade">
+        <div v-if="isDeleteModalOpen" class="fixed inset-0 z-100 flex items-center justify-center bg-gray-900/50 backdrop-blur-sm p-4" @click="isDeleteModalOpen = false">
+          <div class="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl w-full max-w-sm mx-auto p-6 md:p-8 flex flex-col items-center text-center border border-gray-200 dark:border-gray-800" @click.stop>
+            <div class="w-14 h-14 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center mb-5 shrink-0">
+              <UIcon name="i-heroicons-exclamation-triangle" class="w-7 h-7 text-red-600 dark:text-red-400" />
             </div>
-            <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Delete Preset?</h3>
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Delete Preset?</h3>
             <p class="text-sm text-gray-500 dark:text-gray-400 mb-6">
               Are you sure you want to delete this preset? This action cannot be undone.
             </p>
             <div class="flex gap-3 w-full">
-              <UButton color="neutral" variant="soft" class="flex-1 justify-center" @click="isDeleteModalOpen = false">Cancel</UButton>
-              <UButton color="error" variant="solid" class="flex-1 justify-center" @click="executeDelete">Delete</UButton>
+              <UButton color="neutral" variant="soft" class="flex-1 w-full justify-center rounded-full" size="lg" @click="isDeleteModalOpen = false">Cancel</UButton>
+              <UButton color="error" variant="solid" class="flex-1 w-full justify-center rounded-full shadow-sm hover:shadow-md transition-all active:scale-95" size="lg" @click="executeDelete">Delete</UButton>
             </div>
           </div>
         </div>
-      </template>
-    </UModal>
-  </KintaiCard>
+      </Transition>
+    </Teleport>
+  </ClientOnly>
 </template>
 
 <style scoped>
