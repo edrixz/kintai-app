@@ -120,7 +120,7 @@ const executeDelete = async () => {
   const doc = await db.presets.findOne({ selector: { id: presetToDelete.value } }).exec();
   if (doc) {
     await doc.remove();
-    toast.add({ title: 'Deleted', description: 'Preset removed successfully.', color: 'neutral' });
+    toast.add({ title: 'Deleted', description: 'Preset removed successfully.', color: 'success', icon: 'i-heroicons-trash' });
   }
   isDeleteModalOpen.value = false;
   presetToDelete.value = null;
@@ -193,11 +193,16 @@ const importJson = async (e: Event) => {
 <template>
   <KintaiCard :title="cardTitle" icon="i-heroicons-bookmark-square" class="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-xl ring-1 ring-gray-200 dark:ring-gray-800">
     <template #header-actions>
-      <div v-if="!isEditing" class="flex items-center gap-2">
-        <input type="file" ref="fileInput" class="hidden" accept=".json" @change="importJson" />
-        <UButton color="neutral" variant="ghost" icon="i-heroicons-arrow-up-tray" @click="fileInput?.click()" title="Import JSON" aria-label="Import JSON" />
-        <UButton color="neutral" variant="ghost" icon="i-heroicons-arrow-down-tray" @click="exportJson" title="Export JSON" aria-label="Export JSON" />
-        <UButton color="primary" variant="solid" icon="i-heroicons-plus" @click="startAdd" title="New Preset" />
+      <div class="flex items-center gap-2">
+        <template v-if="!isEditing">
+          <input type="file" ref="fileInput" class="hidden" accept=".json" @change="importJson" />
+          <UButton color="neutral" variant="soft" icon="i-heroicons-arrow-up-tray" class="rounded-full w-10 h-10 flex items-center justify-center [&_svg]:w-5 [&_svg]:h-5 transition-transform hover:scale-105 active:scale-95" @click="fileInput?.click()" title="Import JSON" aria-label="Import JSON" />
+          <UButton color="neutral" variant="soft" icon="i-heroicons-arrow-down-tray" class="rounded-full w-10 h-10 flex items-center justify-center [&_svg]:w-5 [&_svg]:h-5 transition-transform hover:scale-105 active:scale-95" @click="exportJson" title="Export JSON" aria-label="Export JSON" />
+          <UButton color="primary" variant="solid" icon="i-heroicons-plus" class="rounded-full w-10 h-10 flex items-center justify-center [&_svg]:w-5 [&_svg]:h-5 shadow-sm transition-transform hover:scale-105 hover:shadow-md active:scale-95" @click="startAdd" title="New Preset" />
+        </template>
+        <template v-else>
+          <UButton color="neutral" variant="soft" icon="i-heroicons-x-mark" class="rounded-full w-10 h-10 flex items-center justify-center [&_svg]:w-5 [&_svg]:h-5 transition-transform hover:scale-105 active:scale-95" @click="cancelEdit" title="Cancel" aria-label="Cancel" />
+        </template>
       </div>
     </template>
 
@@ -220,7 +225,7 @@ const importJson = async (e: Event) => {
               </div>
             </div>
             <div class="flex items-center gap-2">
-              <UButton color="error" variant="soft" icon="i-heroicons-trash" @click.stop="confirmDelete(p.id)" title="Delete" aria-label="Delete" />
+              <UButton color="error" variant="soft" icon="i-heroicons-trash" class="rounded-full w-10 h-10 flex items-center justify-center [&_svg]:w-5 [&_svg]:h-5 transition-transform hover:scale-105 active:scale-95" @click.stop="confirmDelete(p.id)" title="Delete" aria-label="Delete" />
             </div>
           </div>
           <div v-if="presets.length === 0" class="text-center h-full flex flex-col items-center justify-center bg-gray-50 dark:bg-gray-900/50 rounded-xl border border-dashed border-gray-300 dark:border-gray-700">
@@ -251,8 +256,7 @@ const importJson = async (e: Event) => {
             </div>
           </div>
 
-          <div class="flex justify-end gap-3 pt-6 border-t border-gray-200 dark:border-gray-800 shrink-0">
-            <UButton color="neutral" variant="ghost" @click="cancelEdit">Cancel</UButton>
+          <div class="flex justify-end pt-6 border-t border-gray-200 dark:border-gray-800 shrink-0">
             <BaseButton icon="i-heroicons-check" @click="savePreset">Save Preset</BaseButton>
           </div>
         </div>
