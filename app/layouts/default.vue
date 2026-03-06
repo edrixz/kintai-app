@@ -11,7 +11,7 @@ const navigation = [
 </script>
 
 <template>
-  <div class="min-h-screen relative overflow-hidden bg-linear-to-br from-gray-50 to-gray-200 dark:from-gray-900 dark:to-gray-950 flex flex-col">
+  <div class="min-h-screen relative overflow-x-hidden bg-linear-to-br from-gray-50 to-gray-200 dark:from-gray-900 dark:to-gray-950 flex flex-col">
     <!-- Global Decorative Background Elements -->
     <div class="fixed top-0 inset-x-0 h-96 bg-linear-to-b from-sky-500/10 to-transparent pointer-events-none z-0"></div>
     <div class="fixed -top-40 -right-40 w-96 h-96 bg-sky-500/10 rounded-full blur-3xl pointer-events-none z-0"></div>
@@ -60,7 +60,7 @@ const navigation = [
     </div>
 
     <!-- Header Navigation Bar -->
-    <header class="sticky top-0 z-40 w-full backdrop-blur-md bg-white/75 dark:bg-gray-900/75 border-b border-gray-200 dark:border-gray-800 shadow-sm flex-none">
+    <header class="fixed top-0 inset-x-0 z-40 w-full backdrop-blur-md bg-white/75 dark:bg-gray-900/75 border-b border-gray-200 dark:border-gray-800 shadow-sm flex-none">
       <div class="w-full mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-16">
           <div class="flex items-center gap-4">
@@ -92,7 +92,7 @@ const navigation = [
     </header>
 
     <!-- Main Content Area -->
-    <main class="flex-1 relative z-10 w-full overflow-y-auto">
+    <main class="flex-1 w-full mt-16 relative z-10">
       <div class="py-10 px-4 sm:px-6 lg:px-8 mx-auto w-full max-w-7xl">
         <slot />
       </div>
